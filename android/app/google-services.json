@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "418632351192",
+    "project_id": "wtheq-demo",
+    "storage_bucket": "wtheq-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418632351192:android:836257a16ea94e45c946ad",
+        "android_client_info": {
+          "package_name": "com.example.wteq_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSDyNrf6NGSnx-E285w8w5uN-dYsUPUzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
