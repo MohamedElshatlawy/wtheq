@@ -20,7 +20,7 @@ class HomeScreenViewModel {
   GenericCubit<List<ProductModel>> favProductsList = GenericCubit([]);
   GenericCubit<List<ProductModel>> cartList = GenericCubit([]);
   GenericCubit<List<String>> adsList = GenericCubit([]);
-  final GenericCubit<bool> enableAdsValue = GenericCubit(false);
+  GenericCubit<bool> enableAdsValue = GenericCubit(false);
 
   void updateCarouselIndex(int index, CarouselPageChangedReason reason) {
     carouselIndex.onUpdateData(index);
