@@ -14,22 +14,23 @@ A step-by-step guide on how to get the development environment set up.
 
 Clone this repository:
 
-shell
-Copy code
-git clone https://github.com/MohamedElshatlawy/wtheq
-Change into the project directory:
+# shell
+  Copy code
+  git clone https://github.com/MohamedElshatlawy/wtheq
+  Change into the project directory:
 
-shell
-Copy code
-cd yourproject
-Install dependencies:
+# shell
+  Copy code
+  cd yourproject
+  Install dependencies:
 
-shell
-Copy code
-flutter pub get
-Running the App
-Explain how to run the Flutter app, including any important flags or environment variables:
+# shell
+  Copy code
+  flutter pub get
+  Running the App
+  
+# Explain how to run the Flutter app, including any important flags or environment variables:
 
-shell
-Copy code
-flutter run
+# shell
+  Copy code
+  flutter run
