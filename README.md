@@ -1,16 +1,36 @@
-# wteq_demo
+## Wtheq POC
+  This is a POC for ecommerce application connected to firebase remote config, has local database and realtime ads
 
-A new Flutter project.
+# Getting Started
+- These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
 
-## Getting Started
+# Prerequisites
+List any prerequisites or requirements for running the project. For example, you might need to have the following installed:
 
-This project is a starting point for a Flutter application.
+- Flutter: Install Flutter
+- Dart: Install Dart
+# Installing
+A step-by-step guide on how to get the development environment set up.
 
-A few resources to get you started if this is your first Flutter project:
+Clone this repository:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# shell
+  Copy code
+  git clone https://github.com/MohamedElshatlawy/wtheq
+  Change into the project directory:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# shell
+  Copy code
+  cd yourproject
+  Install dependencies:
+
+# shell
+  Copy code
+  flutter pub get
+  Running the App
+  
+# Explain how to run the Flutter app, including any important flags or environment variables:
+
+# shell
+  Copy code
+  flutter run
