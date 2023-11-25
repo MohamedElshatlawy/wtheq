@@ -42,7 +42,8 @@ Future<void> init() async {
 
   /// VIEW MODELS
   sl.registerFactory(() => MainScreenViewModel());
-  sl.registerFactory(() => HomeScreenViewModel(homeUseCase: sl()));
+  sl.registerFactory(
+      () => HomeScreenViewModel(homeUseCase: sl(), networkInfo: sl()));
 
   /// USECASES
   sl.registerLazySingleton(() => HomeUseCase(sl()));

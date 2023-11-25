@@ -122,7 +122,7 @@ class _CartItemState extends State<CartItem> {
                             color: AppColors.grey.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(10.r),
                           ),
-                          child: widget.productData.isFav == true
+                          child: widget.productData.isFav == 1
                               ? const Icon(Icons.favorite,
                                   size: 18, color: AppColors.red)
                               : Row(

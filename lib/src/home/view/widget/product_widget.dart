@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/common/app_colors/app_colors.dart';
 import '../../../../core/common/app_font_style/app_font_style_global.dart';
-import '../../../../core/components/app_button/app_button.dart';
 import '../../../../core/util/custom_network_image.dart';
 import '../../../../core/util/localization/app_localizations.dart';
 import '../../data/models/Product_model.dart';
@@ -14,13 +15,14 @@ class ProductWidget extends StatelessWidget {
   final ProductModel productData;
   final void Function() addToFav;
   final void Function() addToCart;
-
-  const ProductWidget(
-      {Key? key,
-      required this.productData,
-      required this.addToFav,
-      required this.addToCart})
-      : super(key: key);
+  final bool? fromFav;
+  const ProductWidget({
+    Key? key,
+    required this.productData,
+    required this.addToFav,
+    required this.addToCart,
+    this.fromFav = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class ProductWidget extends StatelessWidget {
           'productData': productData,
           'addToCart': addToCart,
           'addToFav': addToFav,
+          'fromFav': fromFav,
         },
       ),
       child: Container(
@@ -63,7 +66,7 @@ class ProductWidget extends StatelessWidget {
                   width: 24,
                   height: 24,
                   child: Icon(
-                    productData.isFav!
+                    productData.isFav == 1
                         ? Icons.favorite
                         : Icons.favorite_border_outlined,
                     size: 14,
@@ -79,10 +82,15 @@ class ProductWidget extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.r),
-                    child: CustomNetworkImage(
-                      url: productData.thumb,
-                      fit: BoxFit.fill,
-                    ),
+                    child: fromFav == false
+                        ? CustomNetworkImage(
+                            url: productData.thumb,
+                            fit: BoxFit.fill,
+                          )
+                        : Image.file(
+                            File(productData.thumb ?? ''),
+                            fit: BoxFit.fill,
+                          ),
                   )),
             ),
             Text(
@@ -143,10 +151,10 @@ class ProductWidget extends StatelessWidget {
                 ),
               ),
             ),
-            AppButton(
-              onPressed: addToCart,
-              title: 'Add To Cart',
-            )
+            // AppButton(
+            //   onPressed: addToCart,
+            //   title: 'Add To Cart',
+            // )
           ],
         ),
       ),

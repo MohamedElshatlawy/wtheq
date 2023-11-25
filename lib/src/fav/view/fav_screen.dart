@@ -23,6 +23,12 @@ class FavScreen extends StatefulWidget {
 
 class _FavScreenState extends State<FavScreen> {
   @override
+  void initState() {
+    widget.viewModel.getFavProduct();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -59,7 +65,8 @@ class _FavScreenState extends State<FavScreen> {
                       top: 10.h, bottom: 35.h, left: 16.w, right: 16.w),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 0.52,
+                      childAspectRatio: 0.6,
+                      // 0.52,
                       crossAxisSpacing: 10.w,
                       mainAxisSpacing: 10.h),
                   clipBehavior: Clip.none,
@@ -72,6 +79,7 @@ class _FavScreenState extends State<FavScreen> {
                           .changeProductFav(title: states.data[index].title!),
                       addToCart: () => widget.viewModel
                           .addProductToCart(title: states.data[index].title!),
+                      fromFav: true,
                     );
                   },
                   itemCount: states.data.length,

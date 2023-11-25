@@ -12,6 +12,7 @@ class NotificationHelper {
 
   static final LocalStorage notificationStorage =
       LocalStorage('notification.json');
+
   Future<void> initNotification() async {
     await _firebaseMessaging.requestPermission();
     final fCMToken = await _firebaseMessaging.getToken();

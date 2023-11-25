@@ -40,6 +40,22 @@ class GenericUpdatedState<T> extends GenericCubitState<T> {
   List<Object> get props => [changed];
 }
 
+class GenericChangeState<T> extends GenericCubitState<T> {
+  const GenericChangeState({required T data, required bool changed})
+      : super(data: data, changed: changed);
+
+  @override
+  List<Object> get props => [changed];
+}
+
+class GenericConnectionError<T> extends GenericCubitState<T> {
+  const GenericConnectionError({required T data, required bool changed})
+      : super(data: data, changed: changed);
+
+  @override
+  List<Object> get props => [changed];
+}
+
 class GenericErrorState<T> extends GenericCubitState<T> {
   const GenericErrorState(
       {required data, required Failure responseError, required bool changed})

@@ -1,11 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/common/app_colors/app_colors.dart';
 import '../../../core/common/app_font_style/app_font_style_global.dart';
-import '../../../core/components/app_button/app_button.dart';
-import '../../../core/components/app_snake_bar/app_snake_bar.dart';
 import '../../../core/util/custom_network_image.dart';
 import '../../../core/util/localization/app_localizations.dart';
 import '../data/models/Product_model.dart';
@@ -14,12 +14,14 @@ class ProductDetailsScreen extends StatefulWidget {
   final ProductModel productData;
   final void Function() addToCart;
   final void Function() addToFav;
+  final bool? fromFav;
 
   const ProductDetailsScreen({
     Key? key,
     required this.productData,
     required this.addToCart,
     required this.addToFav,
+    this.fromFav = false,
   }) : super(key: key);
   static const String routeName = 'Product Details Screen';
 
@@ -62,10 +64,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10.r),
                             topRight: Radius.circular(10.r)),
-                        child: CustomNetworkImage(
-                          url: widget.productData.thumb,
-                          fit: BoxFit.fill,
-                        ))),
+                        child: widget.fromFav == false
+                            ? CustomNetworkImage(
+                                url: widget.productData.thumb,
+                                fit: BoxFit.fill,
+                              )
+                            : Image.file(
+                                File(widget.productData.thumb ?? ''),
+                                fit: BoxFit.fill,
+                              ))),
                 SizedBox(height: 30.h),
                 Row(
                   children: [
@@ -97,7 +104,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           width: 30,
                           height: 30,
                           child: Icon(
-                            widget.productData.isFav!
+                            widget.productData.isFav == 1
                                 ? Icons.favorite
                                 : Icons.favorite_border_outlined,
                             size: 20,
@@ -160,28 +167,28 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ],
             ),
-            AppButton(
-              onPressed: () {
-                AppSnakeBar.showSnakeBar(
-                  context: context,
-                  message: 'Product Added To Cart Successfully',
-                  margin: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.height - 100.h,
-                    right: 24.w,
-                    left: 24.w,
-                  ),
-                );
-                widget.addToCart;
-              },
-              height: 48.h,
-              titleStyle:
-                  AppFontStyleGlobal(AppLocalizations.of(context)!.locale)
-                      .subTitle1
-                      .copyWith(
-                        color: AppColors.white,
-                      ),
-              title: 'Add To Cart',
-            )
+            // AppButton(
+            //   onPressed: () {
+            //     AppSnakeBar.showSnakeBar(
+            //       context: context,
+            //       message: 'Product Added To Cart Successfully',
+            //       margin: EdgeInsets.only(
+            //         bottom: MediaQuery.of(context).size.height - 100.h,
+            //         right: 24.w,
+            //         left: 24.w,
+            //       ),
+            //     );
+            //     widget.addToCart;
+            //   },
+            //   height: 48.h,
+            //   titleStyle:
+            //       AppFontStyleGlobal(AppLocalizations.of(context)!.locale)
+            //           .subTitle1
+            //           .copyWith(
+            //             color: AppColors.white,
+            //           ),
+            //   title: 'Add To Cart',
+            // )
           ],
         ),
       ),

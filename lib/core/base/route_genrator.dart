@@ -22,6 +22,7 @@ class RouteGenrator {
                   productData: args['productData'],
                   addToCart: args['addToCart'],
                   addToFav: args['addToFav'],
+                  fromFav: args['fromFav'] ?? false,
                 ));
       case NotificationScreen.routeName:
         return MaterialPageRoute(builder: (_) => const NotificationScreen());

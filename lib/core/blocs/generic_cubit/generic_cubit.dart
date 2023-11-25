@@ -17,7 +17,11 @@ class GenericCubit<T> extends Cubit<GenericCubitState<T>> {
   }
 
   onChangeState() {
-    emit(GenericLoadingState<T>(data: state.data, changed: !state.changed));
+    emit(GenericChangeState<T>(data: state.data, changed: !state.changed));
+  }
+
+  onConnectionError() {
+    emit(GenericConnectionError<T>(data: state.data, changed: !state.changed));
   }
 
   onDismissLoadingState() {

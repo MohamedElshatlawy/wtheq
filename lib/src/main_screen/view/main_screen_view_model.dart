@@ -8,9 +8,11 @@ class MainScreenViewModel {
   MainScreenViewModel();
 
   final homeScreenViewModel = sl<HomeScreenViewModel>()
-    ..getProductsList()
-    ..getAdsList()
-    ..getEnableAdsValue();
+        ..getProductsList()
+        ..setupDb()
+      // ..getAdsList()
+      // ..getEnableAdsValue()
+      ;
 
   GenericCubit<int> screenIndex = GenericCubit<int>(0);
   PageController pageController = PageController();

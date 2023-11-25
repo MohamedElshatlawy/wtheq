@@ -19,7 +19,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   }) async {
     Map<String, dynamic> queryParams = {
       "pageNumber": pageNumber,
-      // "pageSize": pageSize,
+      "pageSize": pageSize,
     };
     final response = await networkService.get(
       'api/1.0/deals',
