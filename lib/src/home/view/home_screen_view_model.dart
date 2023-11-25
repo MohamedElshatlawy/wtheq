@@ -39,6 +39,12 @@ class HomeScreenViewModel {
     carouselIndex.onUpdateData(index);
   }
 
+  init() async {
+    await setupDb();
+    await getFavProduct();
+    await getProductsList();
+  }
+
   Future<void> setupDb() async {
     dbInstance = await SqlService.getInstance();
   }
@@ -60,9 +66,13 @@ class HomeScreenViewModel {
           }
         }
         if (favProductsList.state.data.isNotEmpty) {
-          for (var element in allProducts) {
-            if (favProductsList.state.data.contains(element)) {
-              element.isFav = 1;
+          title = [];
+          for (var element in favProductsList.state.data) {
+            title.add(element.title ?? '');
+          }
+          for (var e in allProducts) {
+            if (title.contains(e.title)) {
+              e.isFav = 1;
             }
           }
         }
@@ -104,12 +114,6 @@ class HomeScreenViewModel {
         }
       }
       allProductsList.onUpdateData(allProductsList.state.data);
-
-      // for (var element in allProductsList.state.data) {
-      //   if (element.isFav == 1) {
-      //     favProducts.add(element);
-      //   }
-      // }
       favProducts = await dbInstance!.loadSavedProduct();
       favProductsList.onUpdateData(favProducts);
     }

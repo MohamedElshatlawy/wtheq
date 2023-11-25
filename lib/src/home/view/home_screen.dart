@@ -10,9 +10,6 @@ import '../../../core/common/app_font_style/app_font_style_global.dart';
 import '../../../core/components/app_alert_dialog/app_alert_dialog.dart';
 import '../../../core/components/app_custom_refresh_indicator/app_custom_refresh_indicator.dart';
 import '../../../core/util/localization/app_localizations.dart';
-import '../../../core/util/notification_helper.dart';
-import '../../notification_screen/data/models/notification_model.dart';
-import '../../notification_screen/view/notification_screen.dart';
 import '../data/models/Product_model.dart';
 import 'home_screen_view_model.dart';
 
@@ -29,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     widget.viewModel.connectionChecker(context: context);
+    widget.viewModel.getProductsList();
     super.initState();
   }
 
@@ -37,49 +35,49 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.white,
-          actions: [
-            BlocConsumer<GenericCubit<List<NotificationModel>>,
-                GenericCubitState<List<NotificationModel>>>(
-              bloc: NotificationHelper.notificationsCubit,
-              builder: (context, states) {
-                return Stack(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          NotificationScreen.routeName,
-                        );
-                        NotificationHelper.changeNotificationStatus();
-                        setState(() {});
-                      },
-                      icon: const Icon(
-                        Icons.notifications,
-                        size: 24,
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 22,
-                      left: 13,
-                      child: Visibility(
-                        visible:
-                            states.data.any((element) => element.seen == false),
-                        child: Container(
-                          height: 10,
-                          width: 10,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: AppColors.red),
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              },
-              listener: (BuildContext context,
-                  GenericCubitState<List<NotificationModel>> state) {},
-            ),
-          ],
+          // actions: [
+          //   BlocConsumer<GenericCubit<List<NotificationModel>>,
+          //       GenericCubitState<List<NotificationModel>>>(
+          //     bloc: NotificationHelper.notificationsCubit,
+          //     builder: (context, states) {
+          //       return Stack(
+          //         children: [
+          //           IconButton(
+          //             onPressed: () {
+          //               Navigator.pushNamed(
+          //                 context,
+          //                 NotificationScreen.routeName,
+          //               );
+          //               NotificationHelper.changeNotificationStatus();
+          //               setState(() {});
+          //             },
+          //             icon: const Icon(
+          //               Icons.notifications,
+          //               size: 24,
+          //               color: AppColors.primaryColor,
+          //             ),
+          //           ),
+          //           Positioned(
+          //             bottom: 22,
+          //             left: 13,
+          //             child: Visibility(
+          //               visible:
+          //                   states.data.any((element) => element.seen == false),
+          //               child: Container(
+          //                 height: 10,
+          //                 width: 10,
+          //                 decoration: const BoxDecoration(
+          //                     shape: BoxShape.circle, color: AppColors.red),
+          //               ),
+          //             ),
+          //           )
+          //         ],
+          //       );
+          //     },
+          //     listener: (BuildContext context,
+          //         GenericCubitState<List<NotificationModel>> state) {},
+          //   ),
+          // ],
           centerTitle: true,
           title: Text(
             'Home',

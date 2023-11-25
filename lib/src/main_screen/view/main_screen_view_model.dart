@@ -7,9 +7,7 @@ import '../../home/view/home_screen_view_model.dart';
 class MainScreenViewModel {
   MainScreenViewModel();
 
-  final homeScreenViewModel = sl<HomeScreenViewModel>()
-        ..getProductsList()
-        ..setupDb()
+  final homeScreenViewModel = sl<HomeScreenViewModel>()..init()
       // ..getAdsList()
       // ..getEnableAdsValue()
       ;
