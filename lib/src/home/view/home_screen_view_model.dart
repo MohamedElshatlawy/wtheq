@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
@@ -11,7 +10,6 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../../core/blocs/generic_cubit/generic_cubit.dart';
 import '../../../core/common/models/failure.dart';
-import '../../../core/components/app_alert_dialog/app_alert_dialog.dart';
 import '../../../core/util/firebase_remote_config_service/firebase_remote_config_keys.dart';
 import '../../../core/util/firebase_remote_config_service/firebase_remote_config_service.dart';
 import '../../../core/util/network/network_info.dart';
@@ -81,6 +79,7 @@ class HomeScreenViewModel {
         allProductsList.onErrorState(e);
       }
     } else {
+      print('kkkkkkkkkkkkkkkk');
       allProductsList.onConnectionError();
     }
   }
@@ -210,17 +209,6 @@ class HomeScreenViewModel {
         FirebaseRemoteConfigService().getBool(FirebaseRemoteConfigKeys.showAds);
     print('hhhhhhhh:$showAds');
     enableAdsValue.onUpdateData(showAds);
-  }
-
-  connectionChecker({required BuildContext context}) async {
-    if (!await networkInfo.isConnected) {
-      if (context.mounted) {
-        await AppAlertDialog().showInternetConnectionDialog(
-          context: context,
-          title: 'No Internet Connection Available\nPlease Retry Again',
-        );
-      }
-    }
   }
 
   getFavProduct() async {

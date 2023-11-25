@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:wteq_demo/core/components/app_snake_bar/app_snake_bar.dart';
 import 'package:wteq_demo/src/home/view/widget/product_widget.dart';
 
 import '../../../core/blocs/generic_cubit/generic_cubit.dart';
 import '../../../core/common/app_colors/app_colors.dart';
 import '../../../core/common/app_font_style/app_font_style_global.dart';
-import '../../../core/components/app_alert_dialog/app_alert_dialog.dart';
 import '../../../core/components/app_custom_refresh_indicator/app_custom_refresh_indicator.dart';
 import '../../../core/util/localization/app_localizations.dart';
+import '../../main_screen/view/main_screen.dart';
 import '../data/models/Product_model.dart';
 import 'home_screen_view_model.dart';
 
@@ -25,7 +26,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    widget.viewModel.connectionChecker(context: context);
     widget.viewModel.getProductsList();
     super.initState();
   }
@@ -88,18 +88,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
           ),
         ),
-        body: BlocConsumer<GenericCubit<List<ProductModel>>,
+        body: BlocBuilder<GenericCubit<List<ProductModel>>,
                 GenericCubitState<List<ProductModel>>>(
             bloc: widget.viewModel.allProductsList,
-            listener: (context, states) async {
-              if (states is GenericConnectionError) {
-                await AppAlertDialog().showInternetConnectionDialog(
-                  context: context,
-                  title: 'No Internet Connection Available\nPlease Retry Again',
-                );
-              }
-            },
             builder: (context, states) {
+              print('states $states');
               if (states is GenericLoadingState) {
                 return const Center(
                   child: CircularProgressIndicator(
@@ -117,6 +110,31 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: AppColors.red,
                             ),
                     textAlign: TextAlign.center,
+                  ),
+                );
+              } else if (states is GenericConnectionError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'No Internet Connection Available\nPlease Retry Again',
+                        style: AppFontStyleGlobal(
+                                AppLocalizations.of(context)!.locale)
+                            .subTitle2
+                            .copyWith(
+                              color: AppColors.primaryColor,
+                            ),
+                        textAlign: TextAlign.center,
+                      ),
+                      IconButton(
+                          onPressed: () => Restart.restartApp(
+                              webOrigin: MainScreen.routeName),
+                          icon: const Icon(
+                            Icons.refresh_outlined,
+                            color: AppColors.primaryColor,
+                          ))
+                    ],
                   ),
                 );
               }
