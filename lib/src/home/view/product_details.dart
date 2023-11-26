@@ -12,14 +12,12 @@ import '../data/models/Product_model.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final ProductModel productData;
-  final void Function() addToCart;
   final void Function() addToFav;
   final bool? fromFav;
 
   const ProductDetailsScreen({
     Key? key,
     required this.productData,
-    required this.addToCart,
     required this.addToFav,
     this.fromFav = false,
   }) : super(key: key);
@@ -167,28 +165,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ],
             ),
-            // AppButton(
-            //   onPressed: () {
-            //     AppSnakeBar.showSnakeBar(
-            //       context: context,
-            //       message: 'Product Added To Cart Successfully',
-            //       margin: EdgeInsets.only(
-            //         bottom: MediaQuery.of(context).size.height - 100.h,
-            //         right: 24.w,
-            //         left: 24.w,
-            //       ),
-            //     );
-            //     widget.addToCart;
-            //   },
-            //   height: 48.h,
-            //   titleStyle:
-            //       AppFontStyleGlobal(AppLocalizations.of(context)!.locale)
-            //           .subTitle1
-            //           .copyWith(
-            //             color: AppColors.white,
-            //           ),
-            //   title: 'Add To Cart',
-            // )
           ],
         ),
       ),

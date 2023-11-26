@@ -39,16 +39,9 @@ dependencies:
   get_it: ^7.6.4
   equatable: ^2.0.5
   flutter_rating_bar: ^4.0.1
-  dots_indicator: ^3.0.0
-  carousel_slider: ^4.2.1
   dio: ^4.0.6
   cached_network_image: ^3.2.3
   internet_connection_checker: ^1.0.0+1
-  firebase_core: ^2.20.0
-  firebase_messaging: ^14.7.2
-  cloud_firestore: ^4.12.1
-  localstorage: ^4.0.1+4
-  firebase_remote_config: ^4.3.2
   restart_app: ^1.2.1
   sqflite: ^2.2.8+4
   path: ^1.8.3
@@ -85,8 +78,7 @@ flutter:
   assets:
     - assets/lang/en.json
     - assets/lang/ar.json
-    - assets/images/
-    - assets/icons/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restart_app/restart_app.dart';
-import 'package:wteq_demo/core/components/app_snake_bar/app_snake_bar.dart';
 import 'package:wteq_demo/src/home/view/widget/product_widget.dart';
 
 import '../../../core/blocs/generic_cubit/generic_cubit.dart';
@@ -35,49 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.white,
-          // actions: [
-          //   BlocConsumer<GenericCubit<List<NotificationModel>>,
-          //       GenericCubitState<List<NotificationModel>>>(
-          //     bloc: NotificationHelper.notificationsCubit,
-          //     builder: (context, states) {
-          //       return Stack(
-          //         children: [
-          //           IconButton(
-          //             onPressed: () {
-          //               Navigator.pushNamed(
-          //                 context,
-          //                 NotificationScreen.routeName,
-          //               );
-          //               NotificationHelper.changeNotificationStatus();
-          //               setState(() {});
-          //             },
-          //             icon: const Icon(
-          //               Icons.notifications,
-          //               size: 24,
-          //               color: AppColors.primaryColor,
-          //             ),
-          //           ),
-          //           Positioned(
-          //             bottom: 22,
-          //             left: 13,
-          //             child: Visibility(
-          //               visible:
-          //                   states.data.any((element) => element.seen == false),
-          //               child: Container(
-          //                 height: 10,
-          //                 width: 10,
-          //                 decoration: const BoxDecoration(
-          //                     shape: BoxShape.circle, color: AppColors.red),
-          //               ),
-          //             ),
-          //           )
-          //         ],
-          //       );
-          //     },
-          //     listener: (BuildContext context,
-          //         GenericCubitState<List<NotificationModel>> state) {},
-          //   ),
-          // ],
           centerTitle: true,
           title: Text(
             'Home',
@@ -92,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 GenericCubitState<List<ProductModel>>>(
             bloc: widget.viewModel.allProductsList,
             builder: (context, states) {
-              print('states $states');
               if (states is GenericLoadingState) {
                 return const Center(
                   child: CircularProgressIndicator(
@@ -147,19 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              // BlocBuilder<GenericCubit<bool>, GenericCubitState<bool>>(
-                              //     bloc: widget.viewModel.enableAdsValue,
-                              //     builder: (context, states) {
-                              //       if (states.data) {
-                              //         return Padding(
-                              //             padding: EdgeInsets.only(
-                              //                 top: 30.h, left: 16.w, right: 16.w),
-                              //             child:
-                              //                 HomeSlider(controller: widget.viewModel));
-                              //       } else {
-                              //         return const SizedBox();
-                              //       }
-                              //     }),
                               GridView.builder(
                                 padding: EdgeInsets.only(
                                     top: 20.h,
@@ -170,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
                                         childAspectRatio: 0.6,
-                                        // 0.52,
                                         crossAxisSpacing: 10.w,
                                         mainAxisSpacing: 10.h),
                                 clipBehavior: Clip.none,
@@ -182,14 +123,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   addToFav: () => widget.viewModel
                                       .changeProductFav(
                                           title: states.data[index].title!),
-                                  addToCart: () {
-                                    AppSnakeBar.showSnakeBar(
-                                        context: context,
-                                        message:
-                                            'Product Added To Cart Successfully');
-                                    widget.viewModel.addProductToCart(
-                                        title: states.data[index].title!);
-                                  },
                                   fromFav: false,
                                 ),
                                 itemCount: states.data.length,

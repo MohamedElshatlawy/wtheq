@@ -77,58 +77,6 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     label: "Fav",
                   ),
-                  // BottomNavigationBarItem(
-                  //   icon: BlocBuilder<GenericCubit<List<ProductModel>>,
-                  //           GenericCubitState<List<ProductModel>>>(
-                  //       bloc: viewModel.homeScreenViewModel.cartList,
-                  //       builder: (context, states) {
-                  //         return Stack(
-                  //           alignment: Alignment.topRight,
-                  //           children: [
-                  //             Icon(
-                  //               Icons.shopping_cart,
-                  //               size: 30,
-                  //               color: screenIndexStates.data == 2
-                  //                   ? AppColors.primaryColor
-                  //                   : AppColors.grey.withOpacity(0.3),
-                  //             ),
-                  //             Visibility(
-                  //               visible: states.data.isNotEmpty,
-                  //               child: Container(
-                  //                 alignment: Alignment.center,
-                  //                 height: 15,
-                  //                 width: 15,
-                  //                 decoration: const BoxDecoration(
-                  //                     shape: BoxShape.circle,
-                  //                     color: AppColors.red),
-                  //                 child: Text(
-                  //                   '${states.data.length}',
-                  //                   style: AppFontStyleGlobal(
-                  //                           AppLocalizations.of(context)!
-                  //                               .locale)
-                  //                       .caption
-                  //                       .copyWith(
-                  //                         color: AppColors.white,
-                  //                         overflow: TextOverflow.ellipsis,
-                  //                       ),
-                  //                 ),
-                  //               ),
-                  //             )
-                  //           ],
-                  //         );
-                  //       }),
-                  //   label: "Cart",
-                  // ),
-                  // BottomNavigationBarItem(
-                  //   icon: Icon(
-                  //     Icons.settings,
-                  //     size: 30,
-                  //     color: screenIndexStates.data == 3
-                  //         ? AppColors.primaryColor
-                  //         : AppColors.grey.withOpacity(0.3),
-                  //   ),
-                  //   label: "Settings",
-                  // ),
                 ],
               ),
             ),
@@ -140,8 +88,6 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   HomeScreen(viewModel: viewModel.homeScreenViewModel),
                   FavScreen(viewModel: viewModel.homeScreenViewModel),
-                  // CartScreen(viewModel: viewModel.homeScreenViewModel),
-                  // const SettingScreen(),
                 ],
               ),
             ),

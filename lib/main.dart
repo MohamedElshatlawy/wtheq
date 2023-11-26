@@ -1,13 +1,10 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wteq_demo/core/util/notification_helper.dart';
 import 'package:wteq_demo/src/main_screen/view/main_screen.dart';
 
-import 'core/base/depindancy_injection.dart';
 import 'core/base/depindancy_injection.dart' as di;
+import 'core/base/depindancy_injection.dart';
 import 'core/base/route_genrator.dart';
 import 'core/common/app_colors/app_colors.dart';
 import 'core/util/localization/app_localizations.dart';
@@ -15,12 +12,6 @@ import 'core/util/localization/cubit/localization_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await NotificationHelper().initNotification();
-  await NotificationHelper.foregroundFcm();
-  await NotificationHelper.clickOnNotification();
-  FirebaseMessaging.onBackgroundMessage(
-      NotificationHelper.firebaseMessagingBackgroundHandler);
   await di.init();
   runApp(const MyApp());
 }

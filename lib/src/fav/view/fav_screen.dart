@@ -66,7 +66,6 @@ class _FavScreenState extends State<FavScreen> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 0.6,
-                      // 0.52,
                       crossAxisSpacing: 10.w,
                       mainAxisSpacing: 10.h),
                   clipBehavior: Clip.none,
@@ -77,8 +76,6 @@ class _FavScreenState extends State<FavScreen> {
                       productData: states.data[index],
                       addToFav: () => widget.viewModel
                           .changeProductFav(title: states.data[index].title!),
-                      addToCart: () => widget.viewModel
-                          .addProductToCart(title: states.data[index].title!),
                       fromFav: true,
                     );
                   },

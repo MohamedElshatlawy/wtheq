@@ -14,13 +14,11 @@ import '../product_details.dart';
 class ProductWidget extends StatelessWidget {
   final ProductModel productData;
   final void Function() addToFav;
-  final void Function() addToCart;
   final bool? fromFav;
   const ProductWidget({
     Key? key,
     required this.productData,
     required this.addToFav,
-    required this.addToCart,
     this.fromFav = false,
   }) : super(key: key);
 
@@ -32,7 +30,6 @@ class ProductWidget extends StatelessWidget {
         ProductDetailsScreen.routeName,
         arguments: {
           'productData': productData,
-          'addToCart': addToCart,
           'addToFav': addToFav,
           'fromFav': fromFav,
         },

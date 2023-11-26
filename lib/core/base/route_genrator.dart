@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../src/home/view/product_details.dart';
 import '../../src/main_screen/view/main_screen.dart';
-import '../../src/notification_screen/view/notification_screen.dart';
 
 class RouteGenrator {
   Map<String, dynamic> routs;
@@ -20,12 +19,9 @@ class RouteGenrator {
         return MaterialPageRoute(
             builder: (_) => ProductDetailsScreen(
                   productData: args['productData'],
-                  addToCart: args['addToCart'],
                   addToFav: args['addToFav'],
                   fromFav: args['fromFav'] ?? false,
                 ));
-      case NotificationScreen.routeName:
-        return MaterialPageRoute(builder: (_) => const NotificationScreen());
 
       default:
         return _errorRoute();
