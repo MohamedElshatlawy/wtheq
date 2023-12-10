@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../src/home/view/product_details.dart';
 import '../../src/main_screen/view/main_screen.dart';
+import '../../src/select_employee/view/select_the_employee_screen.dart';
 
-class RouteGenrator {
+class RouteGenerator {
   Map<String, dynamic> routs;
-  RouteGenrator({
+  RouteGenerator({
     required this.routs,
   });
-  static Route<dynamic> genratedRoute(RouteSettings settings) {
-    // final args = settings.arguments;
+  static Route<dynamic> generatedRoute(RouteSettings settings) {
     switch (settings.name) {
       case MainScreen.routeName:
-        return MaterialPageRoute(builder: (_) => MainScreen());
-      case ProductDetailsScreen.routeName:
         final args = settings.arguments as Map;
-
         return MaterialPageRoute(
-            builder: (_) => ProductDetailsScreen(
-                  productData: args['productData'],
-                  addToFav: args['addToFav'],
-                  fromFav: args['fromFav'] ?? false,
+            builder: (_) => MainScreen(
+                  selectedIndex: args['selectedIndex'],
                 ));
+      case SelectTheEmployeeScreen.routeName:
+        return MaterialPageRoute(builder: (_) => SelectTheEmployeeScreen());
 
       default:
         return _errorRoute();

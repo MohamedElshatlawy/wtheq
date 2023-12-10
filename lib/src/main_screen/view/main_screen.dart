@@ -5,12 +5,13 @@ import 'package:wteq_demo/core/common/app_colors/app_colors.dart';
 
 import '../../../core/base/depindancy_injection.dart';
 import '../../../core/blocs/generic_cubit/generic_cubit.dart';
-import '../../fav/view/fav_screen.dart';
-import '../../home/view/home_screen.dart';
+import '../../book_mark/view/book_mark_screen.dart';
+import '../../employee/view/employee_screen.dart';
 import 'main_screen_view_model.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final int selectedIndex;
+  const MainScreen({Key? key, required this.selectedIndex}) : super(key: key);
   static const String routeName = 'Main Screen';
 
   @override
@@ -59,23 +60,23 @@ class _MainScreenState extends State<MainScreen> {
                 items: [
                   BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.home,
+                      Icons.person_outline,
                       size: 30,
                       color: screenIndexStates.data == 0
                           ? AppColors.primaryColor
                           : AppColors.grey.withOpacity(0.3),
                     ),
-                    label: "Home",
+                    label: "Employee",
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.favorite,
+                      Icons.bookmark_border,
                       size: 30,
                       color: screenIndexStates.data == 1
                           ? AppColors.primaryColor
                           : AppColors.grey.withOpacity(0.3),
                     ),
-                    label: "Fav",
+                    label: "Book Mark",
                   ),
                 ],
               ),
@@ -86,8 +87,11 @@ class _MainScreenState extends State<MainScreen> {
                 controller: viewModel.pageController,
                 onPageChanged: (index) {},
                 children: [
-                  HomeScreen(viewModel: viewModel.homeScreenViewModel),
-                  FavScreen(viewModel: viewModel.homeScreenViewModel),
+                  EmployeeScreen(
+                    selectedIndex: widget.selectedIndex,
+                    viewModel: viewModel.employeeViewModel,
+                  ),
+                  BookMarkScreen(viewModel: viewModel.employeeViewModel),
                 ],
               ),
             ),

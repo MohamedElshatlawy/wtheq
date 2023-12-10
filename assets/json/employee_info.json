@@ -1,0 +1,42 @@
+{
+  "message": "Success",
+  "status": 200,
+  "response":[
+    {
+      "employee_id": "c76af6424e2c",
+      "first_name": "Ali",
+      "last_name": "Ahmed",
+      "role": "IT"
+    }, {
+      "employee_id": "e4a7b5ab6649",
+      "first_name": "Abdullatif",
+      "last_name": "Ali",
+      "role": "IT"
+    }, {
+      "employee_id": "3c9ca1daf123",
+      "first_name": "Tamer",
+      "last_name": "Mahmoud",
+      "role": "IT"
+    }, {
+      "employee_id": "6c8d0e3a71cd",
+      "first_name": "Sarah",
+      "last_name": "Ahmed",
+      "role": "IT"
+    }, {
+      "employee_id": "f1799bb39507",
+      "first_name": "Ahmed",
+      "last_name": "Salah",
+      "role": "HR"
+    }, {
+      "employee_id": "c76af7824e2d",
+      "first_name": "Moaz",
+      "last_name": "Ahmed",
+      "role": "HR"
+    }, {
+      "employee_id": "c76af3624e2f",
+      "first_name": "Hend",
+      "last_name": "Ahmed",
+      "role": "HR"
+    }
+  ]
+}

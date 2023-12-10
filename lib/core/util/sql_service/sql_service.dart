@@ -2,7 +2,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../../src/home/data/models/Product_model.dart';
+import '../../../src/employee/data/models/employee_model.dart';
 
 class SqlService {
   static Database? _database;
@@ -17,43 +17,46 @@ class SqlService {
 
   static Future<Database> _initDB() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'wteq.db');
+    final path = join(documentsDirectory.path, 'poc.db');
     return openDatabase(
       path,
       version: 5,
       onOpen: (db) {},
       onCreate: (db, version) async {
-        await db.execute('CREATE TABLE wteq ('
-            'id INTEGER PRIMARY KEY,'
-            'internalName TEXT,'
-            'title TEXT,'
-            'salePrice TEXT,'
-            'normalPrice TEXT,'
-            'steamRatingCount TEXT,'
-            'thumb TEXT,'
-            'isFav REAL,'
-            'qty REAL'
-            ')');
+        await db
+            .execute('CREATE TABLE poc ('
+                'id INTEGER PRIMARY KEY,'
+                'first_name TEXT,'
+                'last_name TEXT,'
+                'role TEXT,'
+                'employee_id TEXT,'
+                'isSaved REAL'
+                ')')
+            .then((value) => print('table created'))
+            .catchError((error) {
+          print('Error when creating table ${error.toString()}');
+        });
       },
     );
   }
 
-  Future insertProduct({required ProductModel productModel}) async {
-    await _database?.insert('wteq', productModel.toJson());
+  Future insertEmployee({required Employee employeeModel}) async {
+    await _database?.insert('poc', employeeModel.toJson());
   }
 
-  Future deleteProduct(String title) async {
-    await _database?.delete('wteq', where: 'title = ?', whereArgs: [title]);
+  Future deleteEmployee(String employeeId) async {
+    await _database
+        ?.delete('poc', where: 'employee_id = ?', whereArgs: [employeeId]);
   }
 
-  Future<List<ProductModel>> loadSavedProduct() async {
-    final res = await _database?.query('wteq');
-    final List<ProductModel> list =
-        res!.isNotEmpty ? res.map(ProductModel.fromJson).toList() : [];
+  Future<List<Employee>> loadSavedEmployee() async {
+    final res = await _database?.query('poc');
+    final List<Employee> list =
+        res!.isNotEmpty ? res.map(Employee.fromJson).toList() : [];
     return list;
   }
 
-  Future<int>? clearWishList() {
-    return _database?.rawDelete('DELETE FROM wteq');
+  Future<int>? clearSavedEmployeeList() {
+    return _database?.rawDelete('DELETE FROM poc');
   }
 }

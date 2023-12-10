@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wteq_demo/src/main_screen/view/main_screen.dart';
+import 'package:wteq_demo/src/select_employee/view/select_the_employee_screen.dart';
 
 import 'core/base/depindancy_injection.dart' as di;
 import 'core/base/depindancy_injection.dart';
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, child) {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
-                    title: 'Wteq Demo',
+                    title: 'POC Demo',
                     theme: ThemeData(
                       scaffoldBackgroundColor: AppColors.backGround,
                       appBarTheme: const AppBarTheme(
@@ -59,8 +59,8 @@ class MyApp extends StatelessWidget {
                       }
                       return supportedLocales.first;
                     },
-                    onGenerateRoute: RouteGenrator.genratedRoute,
-                    initialRoute: MainScreen.routeName,
+                    onGenerateRoute: RouteGenerator.generatedRoute,
+                    initialRoute: SelectTheEmployeeScreen.routeName,
                   );
                 });
           } else {
