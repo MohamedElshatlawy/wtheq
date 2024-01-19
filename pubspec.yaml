@@ -38,7 +38,6 @@ dependencies:
   shared_preferences: ^2.0.15
   get_it: ^7.6.4
   equatable: ^2.0.5
-  flutter_rating_bar: ^4.0.1
   dio: ^4.0.6
   cached_network_image: ^3.2.3
   internet_connection_checker: ^1.0.0+1
@@ -46,6 +45,9 @@ dependencies:
   sqflite: ^2.2.8+4
   path: ^1.8.3
   path_provider: ^2.1.1
+  pull_to_refresh: ^2.0.0
+  intl: ^0.18.0
+  timeago: ^3.4.0
 
 
 

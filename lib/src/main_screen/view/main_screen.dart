@@ -5,8 +5,9 @@ import 'package:wteq_demo/core/common/app_colors/app_colors.dart';
 
 import '../../../core/base/depindancy_injection.dart';
 import '../../../core/blocs/generic_cubit/generic_cubit.dart';
-import '../../fav/view/fav_screen.dart';
-import '../../home/view/home_screen.dart';
+import '../../posts_tap/view/posts_tap_screen.dart';
+import '../../tap_three/view/tap_three_screen.dart';
+import '../../tap_two/view/tap_two_screen.dart';
 import 'main_screen_view_model.dart';
 
 class MainScreen extends StatefulWidget {
@@ -26,23 +27,24 @@ class _MainScreenState extends State<MainScreen> {
         bloc: viewModel.screenIndex,
         builder: (context, screenIndexStates) {
           return Scaffold(
+            extendBody: true,
             bottomNavigationBar: Container(
-              padding: const EdgeInsets.all(15),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(33.0), // adjust to your liking
-                  topRight: Radius.circular(33.0), // adjust to your liking
-                ),
-                color: AppColors.white, // put the color here
+              height: 70,
+              padding: const EdgeInsets.only(
+                right: 15,
+                left: 15,
+                top: 5,
               ),
+              decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30.r),
+                      topRight: Radius.circular(30.r))),
               child: BottomNavigationBar(
-                unselectedLabelStyle:
-                    TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp),
-                selectedLabelStyle:
-                    TextStyle(fontWeight: FontWeight.w500, fontSize: 14.sp),
                 type: BottomNavigationBarType.fixed,
                 elevation: 0,
-                iconSize: 30,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
                 selectedItemColor: AppColors.primaryColor,
                 unselectedItemColor: AppColors.grey.withOpacity(0.3),
                 selectedIconTheme:
@@ -53,42 +55,61 @@ class _MainScreenState extends State<MainScreen> {
                   viewModel.screenIndexChanged(index: value);
                   viewModel.pageController.jumpToPage(value);
                 },
-                selectedFontSize: 14.sp,
                 currentIndex: screenIndexStates.data,
                 backgroundColor: AppColors.white,
                 items: [
                   BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.home,
-                      size: 30,
-                      color: screenIndexStates.data == 0
-                          ? AppColors.primaryColor
-                          : AppColors.grey.withOpacity(0.3),
+                    label: '',
+                    icon: Text(
+                      "Posts",
+                      style: TextStyle(
+                          color: screenIndexStates.data == 0
+                              ? AppColors.primaryColor
+                              : AppColors.grey.withOpacity(0.3),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp),
                     ),
-                    label: "Home",
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.favorite,
-                      size: 30,
-                      color: screenIndexStates.data == 1
-                          ? AppColors.primaryColor
-                          : AppColors.grey.withOpacity(0.3),
+                    label: '',
+                    icon: Text(
+                      "Tab 2",
+                      style: TextStyle(
+                          color: screenIndexStates.data == 1
+                              ? AppColors.primaryColor
+                              : AppColors.grey.withOpacity(0.3),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp),
                     ),
-                    label: "Fav",
+                  ),
+                  BottomNavigationBarItem(
+                    label: '',
+                    icon: Text(
+                      "Tab 3",
+                      style: TextStyle(
+                          color: screenIndexStates.data == 2
+                              ? AppColors.primaryColor
+                              : AppColors.grey.withOpacity(0.3),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.sp),
+                    ),
                   ),
                 ],
               ),
             ),
-            body: SizedBox.expand(
-              child: PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: viewModel.pageController,
-                onPageChanged: (index) {},
-                children: [
-                  HomeScreen(viewModel: viewModel.homeScreenViewModel),
-                  FavScreen(viewModel: viewModel.homeScreenViewModel),
-                ],
+            body: Padding(
+              padding: const EdgeInsets.only(bottom: 70),
+              child: SizedBox.expand(
+                child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: viewModel.pageController,
+                  onPageChanged: (index) {},
+                  children: [
+                    PostsTapScreen(viewModel: viewModel.postsTapViewModel),
+                    const TapTwoScreen(),
+                    const TapThreeScreen(),
+                  ],
+                ),
               ),
             ),
             // viewModel.screens[screenIndexStates.data],

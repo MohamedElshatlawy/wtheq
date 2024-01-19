@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                 builder: (context, child) {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
-                    title: 'Wteq Demo',
+                    title: 'Alrajhi External',
                     theme: ThemeData(
                       scaffoldBackgroundColor: AppColors.backGround,
                       appBarTheme: const AppBarTheme(
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
                       }
                       return supportedLocales.first;
                     },
-                    onGenerateRoute: RouteGenrator.genratedRoute,
+                    onGenerateRoute: RouteGenerator.generatedRoute,
                     initialRoute: MainScreen.routeName,
                   );
                 });

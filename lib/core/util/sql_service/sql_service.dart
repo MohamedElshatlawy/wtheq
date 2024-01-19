@@ -2,7 +2,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../../src/home/data/models/Product_model.dart';
+import '../../../src/posts_tap/data/models/posts_model.dart';
 
 class SqlService {
   static Database? _database;
@@ -17,43 +17,66 @@ class SqlService {
 
   static Future<Database> _initDB() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'wteq.db');
+    final path = join(documentsDirectory.path, 'database.db');
     return openDatabase(
       path,
-      version: 5,
+      version: 9,
       onOpen: (db) {},
       onCreate: (db, version) async {
-        await db.execute('CREATE TABLE wteq ('
+        await db.execute('CREATE TABLE database ('
             'id INTEGER PRIMARY KEY,'
-            'internalName TEXT,'
-            'title TEXT,'
-            'salePrice TEXT,'
-            'normalPrice TEXT,'
-            'steamRatingCount TEXT,'
-            'thumb TEXT,'
-            'isFav REAL,'
-            'qty REAL'
+            'postId TEXT,'
+            'image TEXT,'
+            'likes TEXT,'
+            'tags TEXT,'
+            'text TEXT,'
+            'publishDate TEXT,'
+            'owner TEXT'
             ')');
       },
     );
   }
 
-  Future insertProduct({required ProductModel productModel}) async {
-    await _database?.insert('wteq', productModel.toJson());
+  Future insertProduct({
+    required String id,
+    required String image,
+    required String likes,
+    required String tags,
+    required String text,
+    required String publishDate,
+    required String owner,
+  }) async {
+    Map<String, dynamic> row = {
+      "postId": id,
+      "image": image,
+      "likes": likes,
+      "tags": tags,
+      "text": text,
+      "publishDate": publishDate,
+      "owner": owner,
+    };
+    await _database?.insert('database', row);
   }
 
-  Future deleteProduct(String title) async {
-    await _database?.delete('wteq', where: 'title = ?', whereArgs: [title]);
+  Future deleteProduct(String postId) async {
+    await _database
+        ?.delete('database', where: 'postId = ?', whereArgs: [postId]);
   }
 
-  Future<List<ProductModel>> loadSavedProduct() async {
-    final res = await _database?.query('wteq');
-    final List<ProductModel> list =
-        res!.isNotEmpty ? res.map(ProductModel.fromJson).toList() : [];
+  Future<List<PostModel>> loadSavedProduct() async {
+    final res = await _database?.query('database');
+    List<PostModel> list = [];
+    if (res!.isNotEmpty) {
+      for (var element in res) {
+        list.add(PostModel.fromDataBase(element));
+      }
+    } else {
+      list = [];
+    }
     return list;
   }
 
-  Future<int>? clearWishList() {
-    return _database?.rawDelete('DELETE FROM wteq');
+  Future<int>? clearDataBase() {
+    return _database?.rawDelete('DELETE FROM database');
   }
 }
