@@ -88,10 +88,10 @@ class PostsTapViewModel {
         } else {
           scrollController.loadNoData();
         }
-        for (var element in allPosts) {
+        allPostsList.onUpdateData(allPosts);
+        for (var element in response!.postData!) {
           await insertPostIntoDataBase(post: element);
         }
-        allPostsList.onUpdateData(allPosts);
       } on Failure catch (e) {
         allPostsList.onErrorState(e);
       }
